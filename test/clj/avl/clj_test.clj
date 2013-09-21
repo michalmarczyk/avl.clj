@@ -41,3 +41,10 @@
     (is (every? true? (map = ks (map #(key (nth avl-map %)) ks)))))
   (testing "set rank queries work as expected"
     (is (every? true? (map = ks (map #(nth avl-set %) ks))))))
+
+(deftest bad-args
+  (testing "sorted-map and sorted-map-by expect val for every key"
+    (is (thrown? IllegalArgumentException
+                 (avl/sorted-map [:a 1 :b])))
+    (is (thrown? IllegalArgumentException
+                 (avl/sorted-map-by < [1 :a 2])))))
